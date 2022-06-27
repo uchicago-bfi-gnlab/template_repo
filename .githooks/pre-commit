@@ -1,0 +1,63 @@
+#!/bin/bash
+staged=$(git diff --staged --name-only --diff-filter=d | grep ".R$")
+
+if [ "$staged" = '' ]; then
+	printf "\e[0;32mDidn't find any staged R files to lint.\n\e[0m"
+	exit 0
+fi
+
+printf "\e[0;32mLinting staged R files...\n\e[0m"
+
+linter="
+#! /usr/bin/R
+if (!(\"lintr\" %in% installed.packages()[,\"Package\"])) {
+	print(\"lintr not found. make sure lintr is installed.\")
+	quit(\"no\", 1, runLast = FALSE)
+}
+library(lintr)
+args <- commandArgs(trailingOnly = TRUE)
+print(lint(args[2]))
+"
+echo "$linter" > .linter.R
+
+pass=true
+# run each staged file through the linter
+for file in ${staged}; do
+	# echo the staged file, not the file on disk, to a cache file.
+	# prevents the following:
+	# 1. stages file with linter failures
+	# 2. gets linter failure, goes to fix file
+	# 3. doesn't re-stage fixes, tries to commit the bad original
+	echo "$(git show :${file})" > .lint-file
+
+	# run the linting script against the cache file
+	result=$(Rscript .linter.R --args .lint-file)
+
+	# Check if linter found anything
+	if [ "$result" != "" ]; then
+
+		# write result to .lint-file
+		echo "$result" > .lint-file
+		# fix line references from .lint-file to source file
+		sed -i '' -e "s/\.lint-file/$file/g" .lint-file
+  	printf "\e[0;31mlintr found: ${file}\n\e[0m"
+  	cat .lint-file
+  	pass=false
+	else
+  	printf "\e[0;32mlintr passed: ${file}\n\e[0m"
+	fi
+done
+
+# remove the linter cache file
+rm .lint-file .linter.R
+
+if ! $pass; then
+	printf "\e[0;31mLinting failed for this commit. "
+	printf "Make the corrections above, then re-stage.\n\e[0m"
+	exit 1
+else
+	echo ""
+	printf "\e[0;32mLinting passed for this commit.\n\e[0m"
+	exit 0
+fi
+

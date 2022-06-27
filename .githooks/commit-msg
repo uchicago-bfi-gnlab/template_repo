@@ -1,0 +1,10 @@
+#!/bin/sh
+
+commit_regex='(#[0-9]+|Merg)'
+error_msg="\n\e[0;31mAborting commit. Your commit message is missing an issue number.\n\e[0m"
+
+if ! grep -iE $commit_regex $1; then
+    printf "$error_msg" >&2
+    exit 1
+fi
+
