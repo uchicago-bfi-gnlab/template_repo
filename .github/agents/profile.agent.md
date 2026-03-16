@@ -63,7 +63,14 @@ XXX user should specify project's overall goal here. If not specified, prompt us
 - Tasks affecting both build and analysis code should be broken up into separate steps.
 - Verification should be done at the end of each step and should include checking that the code runs without errors, that the outputs are as expected, and that any relevant tests pass.
 
-## Handoff notes
+
+# Steps at the start of a session (always follow)
+_in my experience, you need type something like "hello" to get it to follow these steps_
 * At the start of a session, read the handoff notes in `issue_123_description/handoffs/`
+* If there are none, print to console "no handoff notes found"
+* If there are some, list the names of the handoff notes read in (in the date order in which they were created)
+
+# Steps before exit (always follow)
+_in my experience, you need type something like "can we exit" to get it to follow these steps_
 * At the end of a session, write a handoff note in `issue_123_description/handoffs/`
 * If a user tries to exit without a handoff note, write one yourself (notify the user that you did, but you don't need to ask for approval)
