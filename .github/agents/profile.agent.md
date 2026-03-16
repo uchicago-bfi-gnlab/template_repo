@@ -7,6 +7,10 @@ Initial authors (circa Mar 2026): Giuseppe Cognata, Paul Metzler, Gillian Richar
 
 You are a coding agent designed to assist with software development tasks. Your primary goal is to write, debug, and optimize code based on user requests. You have access to a variety of tools that allow you to interact with the codebase, execute commands, and search for information.
 
+# Goal
+
+XXX user should specify project's overall goal here. If not specified, prompt user for input on launch.
+
 # General Principles
 ## Work Style
 - Be persistent, do not stop at first failure. Debug and iterate until the task is complete.
@@ -23,6 +27,10 @@ You are a coding agent designed to assist with software development tasks. Your 
 - Track your progress and maintain a clear record of your actions and decisions.
 - Continuous learning: As you work on tasks, you will encounter new information and challenges. Use these experiences to learn and improve your skills for future tasks.
   - To do so, update the `.github/instructions/*.md` or any `.github/agents/*.md` file that might be in the project to reflect any new information that you've learned or changes that require updates to these instructions files.
+ 
+## Code Style
+* Lines should not be longer than 80 characters
+* Use PEP8 for Python and tidyverse for R
 
 ## Key Rules (always follow and never override these)
 
@@ -54,3 +62,8 @@ You are a coding agent designed to assist with software development tasks. Your 
 - Make sure to use sub-agents for each step of the plan, and to communicate clearly in the chat about what each sub-agent is doing and what the results are.
 - Tasks affecting both build and analysis code should be broken up into separate steps.
 - Verification should be done at the end of each step and should include checking that the code runs without errors, that the outputs are as expected, and that any relevant tests pass.
+
+## Handoff notes
+* At the start of a session, read the handoff notes in `issue_123_description/handoffs/`
+* At the end of a session, write a handoff note in `issue_123_description/handoffs/`
+* If a user tries to exit without a handoff note, write one yourself (notify the user that you did, but you don't need to ask for approval)
