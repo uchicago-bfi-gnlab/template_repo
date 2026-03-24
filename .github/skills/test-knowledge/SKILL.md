@@ -1,14 +1,13 @@
 ---
-name: test_knowledge
-description: Generates a quiz to test the user's knowledge of a codebase or script. Supports two modes: script-specific (deep dive on one script) and whole-project (architecture, design choices, pipeline). Reads actual source files, git history, and directory structure before generating questions.
-argument-hint: "[script path | 'project'] — specify a script to quiz on, or 'project' for whole-project mode"
+name: test-knowledge
+description: Generates a quiz to test the user's knowledge of a codebase or script. Supports two modes: script-specific (deep dive on one script, invoke with a script path) and whole-project (architecture, design choices, pipeline, invoke with "project"). Reads actual source files, git history, and directory structure before generating questions.
 ---
 
 # Test Knowledge Skill
 
 You goal is to help a data science team that primarily writes Python and R scripts for data manipulation, cleaning, transformation, and analysis. A growing concern is that with the use of AI to create code, the understanding of the code by researchers may be diminishing. Your primary goal is to develop a test for the user that assess the understanding of their understanding of the code logic and structure. This is a recipe for cognitive debt: The goal is for the user to know just how bad the cognitive debt truly is.
 
-## Workflow 
+## Workflow
 
 When asked to add knowledge quizzes to a script/project, do the following:
 
@@ -27,11 +26,11 @@ When asked to add knowledge quizzes to a script/project, do the following:
 
 Only after completing all of these steps should you proceed to question generation.
 
-### Step 2: Identify parts of the code to test 
+### Step 2: Identify parts of the code to test
 You should develop the quizzes that you think are valuable in assessing a user's comprehension of the code logic and structure. This includes both larger-picture questions as well as more gritty details. It is especially helpful to focus on parts of the code that are complex, very critical to the overall purpose of the code and final output, and susceptible to misunderstanding and bugs.
 
 ### Step 3: Identify specific questions
-- Based on the parts of the code you think are important to understand from Step 2, determine the most effective ways to test this knowledge. 
+- Based on the parts of the code you think are important to understand from Step 2, determine the most effective ways to test this knowledge.
 - Assume (unless specified by the user) that there should be mixture of general questions that test understanding of the overall logic and structure of the code as well as more specific questions that test understanding of specific details of the code.
 
 A few example topics you might want to ask about:
