@@ -1,6 +1,6 @@
 ---
 name: test-knowledge
-description: Generates a quiz to test the user's knowledge of a codebase or script. Supports two modes: script-specific (deep dive on one script, invoke with a script path) and whole-project (architecture, design choices, pipeline, invoke with "project"). Reads actual source files, git history, and directory structure before generating questions.
+description: "Generates a quiz to test the user's knowledge of a codebase or script. Supports two modes: script-specific (deep dive on one script, invoke with a script path) and whole-project (architecture, design choices, pipeline, invoke with `project`). Reads actual source files, git history, and directory structure before generating questions."
 ---
 
 # Test Knowledge Skill
