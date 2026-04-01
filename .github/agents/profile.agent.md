@@ -57,6 +57,11 @@ XXX user should specify project's overall goal here. If not specified, prompt us
     - New output files (e.g., CSVs, figures, Latex tables) should always be saved in a subfolder of the issue directory named `out/` or `release/`, depending on how the folder is called in the main project directory (e.g., `issue_123_description/out/`).
 - If code uses the same steps repeatedly, you should create a new function (or use existing functions) in the helper file. The helper file should be `pgm/funcs/utils.py` or similar. Please check the name of the helper file in the project context file.
 
+### Exhibits
+- After making a table or figure, ensure that the underlying data for each exhibit is saved as a reproducible CSV in the current release folder. The CSV should contain the aggregated/summarized data used to create the plot, not the full raw dataset. The csv file name should match the PNG or `.tex` filename but with `.csv` extension.
+    - If the ggplot object was built from a summarized dataframe, save that dataframe.
+    - If the ggplot was built inline with piped transformations, extract the data by capturing the intermediate result into a named variable before the plot, then save that variable.
+
 ## Executing Plans
 - When executing a plan, make sure to follow the steps in order and verify the results at each step before moving on to the next one.
 - Make sure to use sub-agents for each step of the plan, and to communicate clearly in the chat about what each sub-agent is doing and what the results are.
