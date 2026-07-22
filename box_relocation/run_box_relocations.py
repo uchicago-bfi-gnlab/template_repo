@@ -45,8 +45,8 @@ with CSV_PATH.open(newline="") as f:
                 [str(BASH_SCRIPT), local_file, box_file],
                 check=True,
             )
-        except subprocess.CalledProcessError as e:
-            print(f"ERROR: Bash script failed on row {row_num}", file=sys.stderr)
-            sys.exit(e.returncode)
+        except subprocess.CalledProcessError:
+            print(f"SKIP row {row_num}: no matching local file found, skipping.")
+            continue
 
 print("\nDone.")
